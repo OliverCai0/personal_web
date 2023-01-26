@@ -1,0 +1,62 @@
+<div>
+    <div class="grid grid-cols-5 container m-3 flex-shrink">
+        <div class="container text-center col-span-2">
+        <%= image_tag ("Headshot_Cai_Oliver.jpg"), class: "rounded-full object-scale-down border-2 border-black"  %>
+        </div>
+        <div class="container">
+        </div>
+        <div class="container text-center flex items-center justify-center col-span-2">
+            <div class="grid grid-rows-4">
+                <div class="font-mono text-8xl text-center text-center row-span-3">Oliver Cai</div>
+                <div class="grid grid-cols-3 pt-4">
+                    <a href="https://www.linkedin.com/in/oliver-cai-b5b830146/" class="font-mono text-center text-lg underline">Linkedin</a>
+                    <a href="https://github.com/OliverCai0" class="font-mono text-center text-lg underline">Github</a>
+                    <%=link_to "Resume", @resume.url, class: "font-mono text-center text-lg underline"%>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="relative flex py-5 items-center">
+        <div class="flex-grow border-t border-gray-400"></div>
+        <div>
+            
+        </div>
+    </div>
+    <div>
+        <div class="container m-2">
+            <div class="grid grid-cols-3 container">
+                <div class="font-mono text-5xl"> About Me</div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="font-mono pt-2 text-lg">
+                I'm a third year undergraduate at the University of Chicago studying computer science and
+                mathematics. I'm currently working as a software engineer intern for SMARTCharts. In my 
+                spare time I love to work on interesting projects.
+            </div>
+        </div>
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+        <div class="container m-2">
+            <div class="grid grid-cols-3 container">
+                    <div class="font-mono text-5xl"> Personal Projects </div>
+                    <div></div>
+                    <div></div>
+            </div>
+            <div class="container pt-5 grid max-md:grid-cols-3 gap-3 sm:grid-cols-2 flex-shrink">
+                <% @projects.each do |project|%>
+                    <div class="grid grid-rows-6 border-2 border-black rounded-md p-3 flex-shrink break-words">
+                        <div class="container font-mono text-2xl text-center border-2 border-black items-center justify-center flex-shrink">
+                            <div class="flex-shrink "><%=project.title %></div>
+                        </div>
+                        <div class="font-mono row-span-4 pt-1"><%=project.description %></div>
+                        <div class="items-end flex break-all">
+                            <%=link_to project.url, project.url, class: "font-mono pt-1 underline" %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
