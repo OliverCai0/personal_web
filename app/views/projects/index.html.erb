@@ -1,19 +1,25 @@
 <div>
-    <div class="grid grid-cols-5 container m-3 flex-shrink">
-        <div class="container text-center col-span-2">
+    <div class="grid grid-cols-11 container m-3 flex-shrink">
+        <div class="container text-center col-span-5">
         <%= image_tag ("Headshot_Cai_Oliver.jpg"), class: "rounded-full object-scale-down border-2 border-black"  %>
         </div>
         <div class="container">
         </div>
-        <div class="container text-center flex items-center justify-center col-span-2">
+        <div class="container text-center flex items-center justify-center col-span-5">
             <div class="grid grid-rows-4">
-                <div class="text-5xl md:text-8xl font-mono text-center text-center row-span-3  ">
+                <div class="text-4xl md:text-8xl font-mono text-center text-center row-span-3  ">
                     Oliver Cai
                 </div>
-                <div class="grid grid-cols-3 pt-4">
-                    <a href="https://www.linkedin.com/in/oliver-cai-b5b830146/" class="font-mono text-center text-sm md:text-lg underline">Linkedin</a>
-                    <a href="https://github.com/OliverCai0" class="font-mono text-center text-sm  md:text-lg underline">Github</a>
-                    <%=link_to "Resume", @resume.url, class: "font-mono text-center text-sm  md:text-lg underline"%>
+                <div class="grid grid-cols-3 pt-2">
+                    <div>
+                    <a href="https://www.linkedin.com/in/oliver-cai-b5b830146/" class="font-mono text-center text-xs md:text-2xl underline">Linkedin </a>
+                    </div>
+                    <div>
+                    <a href="https://github.com/OliverCai0" class="font-mono text-center text-xs  md:text-2xl underline">Git</a>
+                    </div>
+                    <div>
+                    <%=link_to "Resume", @resume.url, class: "font-mono text-center text-xs  md:text-2xl underline"%>
+                    </div>
                 </div>
             </div>
         </div>
