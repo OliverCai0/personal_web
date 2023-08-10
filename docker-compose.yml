@@ -1,0 +1,14 @@
+services:
+  pg:
+    image: postgres:latest
+    volumes:
+      - personal-web-data:/var/lib/pg
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: personal_web
+      POSTGRES_USER: postgres
+    ports:
+      - 8001:5432
+
+volumes:
+  personal-web-data:

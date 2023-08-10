@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   resources :projects
+  resources :notascam
   root "projects#index"
 end
