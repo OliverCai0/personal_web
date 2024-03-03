@@ -1,7 +1,7 @@
 <div>
     <div class="grid grid-cols-11 container m-3 flex-shrink">
         <div class="container text-center col-span-5">
-        <%= image_tag ("Headshot_Cai_Oliver.jpg"), class: "rounded-full object-scale-down border-2 border-black"  %>
+        <%= image_tag ("profile_picture.jpeg"), class: "rounded-full object-scale-down border-2 border-black"  %>
         </div>
         <div class="container">
         </div>
@@ -38,9 +38,7 @@
                 <div></div>
             </div>
             <div class="font-mono pt-2 text-sm md:text-lg">
-                I'm a rising fourth year undergraduate at the University of Chicago studying computer science and
-                mathematics. I'm currently working as a software engineer intern for Coinbase. Below are some of 
-                my projects.
+                <%= @content.content %>
             </div>
         </div>
         <div class="relative flex py-5 items-center">
