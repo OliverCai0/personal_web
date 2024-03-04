@@ -6,12 +6,12 @@
         <div class="container">
         </div>
         <div class="container text-center flex items-center justify-center col-span-5">
-            <div class="grid grid-rows-4">
+            <div class="grid grid-rows-5">
                 <div class="text-4xl md:text-8xl font-mono text-center text-center row-span-3  m-3">
                     Oliver Cai
                 </div>
-                <div class="grid grid-cols-3 pt-2">
-                    <div>
+                <div class="grid pt-2 grid-cols-2 row-span-2 gap-3">
+                    <div >
                     <a href="https://www.linkedin.com/in/oliver-cai-b5b830146/" class="font-mono text-center text-xs md:text-2xl underline">Linkedin </a>
                     </div>
                     <div>
@@ -19,6 +19,9 @@
                     </div>
                     <div>
                     <%=link_to "Resume", @resume.url, class: "font-mono text-center text-xs  md:text-2xl underline"%>
+                    </div>
+                    <div>
+                    <a href="" onclick="sendEmail(event)" class="font-mono text-center text-xs  md:text-2xl underline"> Contact</a>
                     </div>
                 </div>
             </div>
@@ -65,4 +68,11 @@
             </div>
         </div>
     </div>
+    <script>
+        function sendEmail(e) {
+            console.log(e);
+            e.preventDefault();
+            console.log("Send Email Pressed");
+        }
+    </script>
 </div>
