@@ -10,7 +10,7 @@
                 <div class="text-4xl md:text-8xl font-mono text-center text-center row-span-3  m-3">
                     Oliver Cai
                 </div>
-                <div class="grid pt-2 grid-cols-2 row-span-2 gap-3">
+                <div class="grid pt-2 grid-cols-2 row-span-2 gap-2">
                     <div >
                     <a href="https://www.linkedin.com/in/oliver-cai-b5b830146/" class="font-mono text-center text-xs md:text-2xl underline">Linkedin </a>
                     </div>
@@ -21,7 +21,7 @@
                     <%=link_to "Resume", @resume.url, class: "font-mono text-center text-xs  md:text-2xl underline"%>
                     </div>
                     <div>
-                    <a href="" onclick="sendEmail(event)" class="font-mono text-center text-xs  md:text-2xl underline"> Contact</a>
+                    <a href="" onclick="scrollToContactForm(event)" class="font-mono text-center text-xs  md:text-2xl underline"> Contact</a>
                     </div>
                 </div>
             </div>
@@ -68,11 +68,81 @@
             </div>
         </div>
     </div>
+    <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-400"></div>
+        </div>
+    <div class="container m-2" id="contact-form">
+            <div class="grid grid-cols-3 container">
+                <div class="font-mono text-3xl md:text-5xl"> Contact</div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="font-mono pt-2 text-sm md:text-lg grid grid-cols-3 gap-5">
+                <form class="grid grid-cols-1 gap-2 col-span-3">
+                    <label>Email</label>
+                    <input class="border-black border-2 p-2" id="email"/>
+                    <label>Name</label>
+                    <input class="border-black border-2 p-2" id="name"/>
+                    <label>Message</label>
+                    <textarea class="border-black border-2 p-2" rows="8" id="content"></textarea>
+                </form>
+                <div class="col-span-3 text-red-500" id="error-message"></div>
+                <div class="col-span-3 text-emerald-700" id="success-message"></div>
+                <div></div>
+                    <button class="rounded shadow hover:bg-gray-100 p-5 border-black border-2" onclick="sendEmail(event)">
+                        Submit
+                    </button>
+                <div></div>
+                <div class="col-span-3 m-6"></div>
+            </div>
+        </div>
     <script>
-        function sendEmail(e) {
-            console.log(e);
+        function scrollToContactForm(e){
+            // console.log(e);
             e.preventDefault();
-            console.log("Send Email Pressed");
+            // console.log("Send Email Pressed");
+            document.getElementById("contact-form").scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function sendEmail(e) {
+            e.preventDefault();
+            e.srcElement.disabled = true;
+            // console.log("Pressed", document.querySelector("meta[name='csrf-token']").content);
+            const url = `api/mail`;
+            fetch(url, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-Token': document.querySelector("meta[name='csrf-token']").content,
+                    "Content-Type": "application/json",
+                    'Accept': 'application/json',
+                },
+                method : "POST",
+                body : JSON.stringify({
+                    email: {
+                        content: document.getElementById("content").value,
+                        name: document.getElementById("name").value,
+                        sender_address: document.getElementById("email").value,
+                    }
+                }),
+                credentials: 'same-origin'
+            }).then(
+                response => {
+                    // console.log(response)
+                    if(response.status === 422){
+                        document.getElementById("error-message").innerHTML = "Please fill out the entire form and use a valid email :)";
+                    }
+                    else{
+                        inputs = Array.from(document.getElementsByTagName('input'));
+                        inputs.forEach((input) => {
+                            input.value = "";
+                        })
+                        document.getElementById("error-message").innerHTML = "";
+                        document.getElementById("success-message").innerHTML = "Successfully sent.";
+                        document.getElementById("content").value = "";
+                    }
+                }
+            )
+            e.srcElement.disabled = false;
         }
     </script>
 </div>
