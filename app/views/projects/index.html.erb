@@ -108,8 +108,8 @@
             e.preventDefault();
             e.srcElement.disabled = true;
             // console.log("Pressed", document.querySelector("meta[name='csrf-token']").content);
-            const url = `api/mail`;
-            fetch(url, {
+            const url = `/api/mail`;
+            fetch("http://" + window.location.hostname +  url, {
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
                     'X-CSRF-Token': document.querySelector("meta[name='csrf-token']").content,
