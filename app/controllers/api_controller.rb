@@ -1,4 +1,5 @@
 class ApiController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def mail
     recipient_email = "STUPID"
     email_object = Email.new(mail_params)
