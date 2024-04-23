@@ -1,0 +1,18 @@
+FROM ruby:3.0.2
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client nginx
+WORKDIR /rails_app
+COPY . .
+RUN bundle install
+
+ARG runtime_environment
+ENV runtime_environment $runtime_environment
+
+# Add a script to be executed every time the container starts.
+COPY rails_entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/rails_entrypoint.sh
+ENTRYPOINT ["rails_entrypoint.sh"]
+
+# RUN RAILS_ENV=$runtime_environment rails assets:precompile
+
+# CMD RAILS_ENV=$runtime_environment rails db:migrate && 
+CMD rails server -b 0.0.0.0 -p 3000 -e $runtime_environment

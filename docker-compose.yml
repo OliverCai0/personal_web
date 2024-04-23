@@ -1,23 +1,29 @@
+version: '3'
 services:
-  pg:
+  postgres:
     image: postgres:latest
     volumes:
       - personal-web-data:/var/lib/pg
     environment:
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
       POSTGRES_DB: personal_web
       POSTGRES_USER: postgres
     ports:
-      - 8001:5432
-  redis:
-    image: redis:6.2-alpine
-    restart: always
+      - 8102:5432
+  rails_app:
+    build:
+      context: /Users/olivercai/Desktop/projects/personal_web
+      dockerfile: 'Dockerfile.rails'
+      args:
+        runtime_environment: ${runtime_environment}
     ports:
-      - '6379:6379'
-    command: redis-server --save 20 1 --loglevel warning --requirepass ${PASSWORD}
-    volumes: 
-      - cache:/data
+      - "3000:3000"
+    environment:
+      - RAILS_LOG_TO_STDOUT=1
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+    depends_on:
+      - postgres
+    
 
 volumes:
   personal-web-data:
-  cache:
