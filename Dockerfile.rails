@@ -1,5 +1,5 @@
 FROM ruby:3.0.2
-RUN apt-get update -qq && apt-get install -y nodejs postgresql-client nginx
+RUN apt-get update -qq && apt-get install -y postgresql-client
 WORKDIR /rails_app
 COPY . .
 RUN bundle install
